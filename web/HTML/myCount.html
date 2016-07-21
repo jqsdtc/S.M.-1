@@ -50,7 +50,7 @@
         <ul class="myTab">
           <li class="active"><a class="on" href="#info" data-toggle="tab">个人信息</a></li>
           <li><a href="#list" data-toggle="tab">我的订单</a></li>
-          <li><a href="#address" data-toggle="tab">购买记录</a></li>
+          <li><a href="#address" data-toggle="tab">地址簿</a></li>
         </ul>
       </div>
 
@@ -68,14 +68,64 @@
               <li>昵称：</li>
               <li>积分：<a href=" ">（什么是积分?）</a></li>
               <li>会员等级：<a href="">（会员等级有什么用？）</a></li>
-              <li>地址：</li>
+              <li>电话：</li>
             </ul>
             <button name="changeInfo" value="个人信息"><a href=" ">修改个人信息</a></button>
             <button name="changePassword" value="密码"><a href=" ">修改密码</a></button>
           </div>
 
-          <div class="tab-pane fade" id="list">dfjlks</div>
-          <div class="tab-pane fade" id="address">dsljfls</div>
+          <div class="tab-pane fade" id="list">
+            <table class="table table-hover">
+              <caption>历史订单</caption>
+              <thead>
+                <tr>
+                  <th>商品图示</th>
+                  <th>名称</th>
+                  <th>价格</th>
+                  <th>数量</th>
+                  <th>日期</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr>
+                  <td><img src="../image/lbj30.jpg"></td>
+                  <td>haha</td>
+                  <td>100</td>
+                  <td>1</td>
+                  <td>2016.7.20</td>
+                </tr>
+                <tr>
+                  <td><img src="../image/lbj30.jpg"></td>
+                  <td>haha</td>
+                  <td>100</td>
+                  <td>1</td>
+                  <td>2016.7.20</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="tab-pane fade" id="address">
+            <p class="title">地址簿</p>
+            <p>您可以在这里保存您的配送地址以加快日后结帐流程</p>
+            <p>您第一个保存的地址设为“默认配送地址”</p>
+            <p class="title">已保存地址</p>
+            <form>
+              <ul>
+                <li><img src="../image/pos1.png">陕西省西安市咸宁西路28号西安交通大学仲英书院 Froggy收<a href="">修改</a><a href="">删除</a></li>
+                <li><img src="../image/pos1.png">陕西省西安市咸宁西路28号西安交通大学仲英书院 Doggy收<a href="">修改</a><a href="">删除</a></li>
+              </ul>
+            </form>
+
+            <a href="#address1">添加新地址</a>
+            <div class="active" id="address1">
+              <form>
+              新地址：<input type="text" name="">
+              <button name="">提交</button>
+              </form>
+            </div>
+          </div>
 
         </div>
       </div>
