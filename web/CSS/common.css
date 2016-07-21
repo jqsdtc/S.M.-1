@@ -33,11 +33,11 @@ body {
 }
 
 #nav-tabs {
-    font-size: 20px;
+    font-size: 16px;
 }
 
 #nav-tabs li{
-    width: 105px;
+    width: 85px;
     line-height: 51px;
     vertical-align: middle;
     text-align: center;
