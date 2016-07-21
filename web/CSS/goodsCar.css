@@ -38,24 +38,9 @@
 	margin-bottom: 80px;
 }
 
-.carContent .goodInfo p a{
-	background-color: #6f6f6f;
-	text-align: center;
-	color: #000;
-	display: block;
-	width: 20px;
+.spinner{
 	float: right;
-	border:none;
-	text-decoration: none;
-}
-
-.carContent .goodInfo p input{
-	font-size: 15px;
-	margin-left: 3px;
-	margin-right: 3px;
-	border:1px #000 solid;
-	width: 20px;
-	float: right;
+	margin-left: 10px;
 }
 
 .carContent .goodNo .delete{
