@@ -3,7 +3,7 @@
     background-color: #2b2b2b;
     overflow: auto;
     color: #fff;
-    padding-left: 100px;
+    padding-left: 40px;
     padding-top: 20px;
 }
 
@@ -16,7 +16,7 @@
     margin-left: 40px;
     float: left;
     list-style-type: none;
-    width: 300px;
+    width: 200px;
     text-align: center;
 }
 
@@ -26,18 +26,19 @@ div{
 
 #login-content{
     margin-top: 60px;
-    margin-left: 270px;
+    margin-left: 100px;
     float: left;
 }
 
 #login-content div{
     color: #6f6f6f;
     width: 300px;
-    padding-top: 45px;
-    padding-left: 30px;
+    padding-top: 50px;
+    padding-left: 20px;
 }
 
 #login-content div input{
+    border:1px #000 solid;
     margin-top: 10px;
     margin-bottom: 30px;
     font-size: 20px;
@@ -70,13 +71,13 @@ div{
 
 #register-content{
     width: 300px;
-    margin-right: 420px;
+    margin-right: 100px;
     margin-top: 60px;
     float: right;
 }
 
 #register-content div{
-    padding-top: 45px;
+    padding-top: 60px;
     padding-left: 30px;
     color: #6f6f6f;
     width: 300px;
@@ -87,6 +88,7 @@ div{
 }
 
 #register-content div input{
+    border:1px #000 solid;
     margin-bottom: 30px;
     margin-top: 10px;
     font-size: 20px;

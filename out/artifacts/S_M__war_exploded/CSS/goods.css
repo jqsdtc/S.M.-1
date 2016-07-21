@@ -1,0 +1,82 @@
+#tool-content{
+	height: 1000px;
+	overflow: auto;
+}
+
+#tool-content .tabbedpanels{
+	float: left;
+	overflow: auto;
+	width: 15%;
+	background-color: #3b312f;
+	height: 1000px;
+}
+
+#tool-content .tabbedpanels img{
+	margin-top: 20px;
+	margin-left: -20px;	
+}
+
+#tool-content .tabbedpanels p{
+	color: #fff;
+	text-align: center;
+	font-size: 17px;
+	margin-bottom: 80px;
+}
+
+#tool-content .tabbedpanels ul li{
+	height: 60px;
+	line-height: 60px;
+	padding-left: 40px;
+	font-size: 18px;
+	margin-top: 10px;
+}
+
+#tool-content .tabbedpanels ul .on{
+	background-color: #554d4a;
+}
+
+
+#tool-content .tabbedpanels ul li a{
+	color: #fff;
+	text-decoration: none;
+}
+
+#tool-content .tabbedpanels ul li .active{
+	color: red;
+}
+
+#tool-content .panelContainer{
+	overflow: auto;
+	float: right;
+	width: 85%;
+}
+
+#tool-content .panelContainer .tool-head{
+	height: 40px;
+	padding-top: 10px;
+	padding-left: 20px;
+	color: #3b312f;
+	font-size: 15px;
+	border-bottom: 2px #3b312f solid; 
+}
+"
+#tool-content .panelContainer .tool-head input{
+	margin-left: 20px;
+}
+
+#tool-content .panelContainer .panel{
+	margin-top: 10px;
+}
+
+#tool-content .panelContainer .panel .tools div{
+	width: 300px;
+	margin-right: 8px;
+	float: left;
+	background-color: #e8e8e8;
+	margin-bottom: 50px;
+}
+
+#tool-content .panelContainer .panel .tools div p{
+	text-align: center;
+	margin-top: 5px;
+}

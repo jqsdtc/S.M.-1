@@ -33,7 +33,7 @@ public class HandleDetial extends HttpServlet {
             request.getSession().setAttribute("infoBean", infoBean);
         }
         if (showListBean == null) {
-            forward = "errorPage.jsp";
+            forward = "/WEB-INF/errorPage.jsp";
             infoBean.setInfo("数据库访问错误，请重试。");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
             requestDispatcher.forward(request, response);
@@ -43,24 +43,25 @@ public class HandleDetial extends HttpServlet {
             if (type.equals("cargo") && ((CargoBean)bean).getId() == id) {
                 cargoBean = (CargoBean)bean;
                 request.getSession().setAttribute("cargoBean", cargoBean);
-                forward = "";
+                forward = "/WEB-INF/detial.jsp";
                 break;
             }
             else if (type.equals("indent") && ((IndentUnitBean)bean).getId() == id) {
                 indentUnitBean = (IndentUnitBean)bean;
                 request.getSession().setAttribute("indentUnitBean", indentUnitBean);
-                forward = "";
+                forward = "/indent.jsp";
                 break;
             }
             else if (type.equals("addres") && ((AddressBean)bean).getId() == id) {
                 addressBean = (AddressBean)bean;
                 request.getSession().setAttribute("addressBean", addressBean);
-                forward = "";
+                forward = "/address.jsp";
                 break;
             }
         }
         if (cargoBean == null && indentUnitBean == null && addressBean ==null || forward == null) {
-            forward = "errorPage.jsp";
+            forward = "/errorPage.jsp";
+            forward = "/errorPage.jsp";
             if (type.equals("cargo"))
                 infoBean.setInfo("商品不存在。");
             if (type.equals("address"))
@@ -73,6 +74,6 @@ public class HandleDetial extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

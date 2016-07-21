@@ -54,12 +54,12 @@ public class HandleShoppingCart extends HttpServlet {
             indentBean.setEmpty(false);
             infoBean.setInfo("");
         }
-        forward = "";
+        forward = "HandleIndentSettle";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
         requestDispatcher.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

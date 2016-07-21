@@ -33,7 +33,7 @@ public class HandleEdit extends HttpServlet {
             request.getSession().setAttribute("infoBean", infoBean);
         }
         if (userBean == null || !userBean.isState()) {
-            forward = "";
+            forward = "/login.jsp";
             infoBean.setInfo("您还未登陆，请登录后重试。");
         }
         else {
@@ -41,7 +41,7 @@ public class HandleEdit extends HttpServlet {
             if (editType.equals("editAddress")) {
                 AddressBean addressBean = (AddressBean) request.getSession().getAttribute("addressBean");
                 if (addressBean == null) {
-                    forward = "errorPage.jsp";
+                    forward = "/errorPage.jsp";
                     infoBean.setInfo("地址无效，请刷新后重试。");
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
                     requestDispatcher.forward(request, response);
@@ -68,7 +68,7 @@ public class HandleEdit extends HttpServlet {
                     userBean.setPhonenum(request.getParameter("phonenum").trim());
                 }
             } catch (SQLException e) {
-                forward = "errorPage.jsp";
+                forward = "/errorPage.jsp";
                 infoBean.setInfo("数据库访问错误，请重试。");
                 e.printStackTrace();
             }
@@ -79,6 +79,6 @@ public class HandleEdit extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

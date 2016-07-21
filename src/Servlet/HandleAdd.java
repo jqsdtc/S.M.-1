@@ -42,7 +42,7 @@ public class HandleAdd extends HttpServlet {
             forward = "";
 
         } catch (SQLException e) {
-            forward = "errorPage.jsp";
+            forward = "/errorPage.jsp";
             infoBean.setInfo("数据库访问错误，请重试。");
             e.printStackTrace();
         }
@@ -51,6 +51,6 @@ public class HandleAdd extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

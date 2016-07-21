@@ -26,7 +26,7 @@ import java.util.List;
 public class HandleShow extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        ShowListBean showListBean = null;
+        ShowListBean showListBean = new ShowListBean();
         String forward = null;
         String type = request.getParameter("type").trim();
         int sign = Integer.parseInt(request.getParameter("sign").trim());
@@ -39,21 +39,24 @@ public class HandleShow extends HttpServlet {
             request.getSession().setAttribute("infoBean", infoBean);
         }
         request.getSession().setAttribute("showListBean", showListBean);
-        String pageSizeGet = request.getParameter("pageSize").trim();
-        if (pageSizeGet != null) {
-            try {
-                int size = Integer.parseInt(pageSizeGet);
-                showListBean.setPageSize(size);
-            } catch(NumberFormatException e) {
-                e.printStackTrace();
-            }
-        }
+//        showListBean.setPageSize(size);
+//        String pageSizeGet = request.getParameter("pageSize").trim();
+//        if (pageSizeGet != null) {
+//            try {
+//                int size = Integer.parseInt(pageSizeGet);
+//                showListBean.setPageSize(size);
+//            } catch(NumberFormatException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         if(request.getParameter("showPage") == null){
             showPage = 1;
         }
         else {
-            showPage = Integer.parseInt(request.getParameter("showPage").trim());
+            if (request.getParameter("showPage") != null)
+                showPage = Integer.parseInt(request.getParameter("showPage").trim());
+            else showPage = 1;
             System.out.println(showPage);
             if(showPage > showListBean.getPageAllCount()) {
                 showPage = showListBean.getPageAllCount();
@@ -69,7 +72,7 @@ public class HandleShow extends HttpServlet {
             String sql;
             if (type.equals("indent") || type.equals("address")) {
                 if (userBean == null || !userBean.isState()) {
-                    forward = "";
+                    forward = "/login.jsp";
                     infoBean.setInfo("您还未登陆，请登录后重试。");
                     RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
                     requestDispatcher.forward(request, response);
@@ -77,40 +80,38 @@ public class HandleShow extends HttpServlet {
                 }
                 else if (type.equals("indent")) {
                     sql = "SELECT * FROM indent WHERE uid='" + sign + "'";
-                    forward = "";
+                    forward = "/indent.jsp";
                 }
                 else {
                     sql = "SELECT * FROM address WHERE uid='" + sign + "'";
-                    forward = "";
+                    forward = "/indent.jsp";
                 }
             }
             else {
                 sql = "SELECT * FROM cargo WHERE sort='"+sign+"'";
-                forward = "";
+                forward = "/cargo.jsp";
             }
             ResultSet resultSet = connector.qurey(sql);
-            if (resultSet.next()) {
-                rowSet = new CachedRowSetImpl();
-                rowSet.populate(resultSet);
-                showListBean.setRowSet(rowSet);
-                rowSet.last();
-                int row = rowSet.getRow();
-                int pageAllCount = ((row % showListBean.getPageSize()) == 0) ? (row / showListBean.getPageSize()) : (row / showListBean.getPageSize() + 1);
-                showListBean.setPageAllCount(pageAllCount);
-                showListBean.setBeanSet(this.genPageUnit(showPage, showListBean.getPageSize(), rowSet, type, sign));
-            }
+            rowSet = new CachedRowSetImpl();
+            rowSet.populate(resultSet);
+            SQLConnector.closeResultSet(resultSet);
+            showListBean.setRowSet(rowSet);
+            rowSet.last();
+            int row = rowSet.getRow();
+            int pageAllCount = ((row % showListBean.getPageSize()) == 0) ? (row / showListBean.getPageSize()) : (row / showListBean.getPageSize() + 1);
+            showListBean.setPageAllCount(pageAllCount);
+            showListBean.setBeanSet(this.genPageUnit(showPage, showListBean.getPageSize(), rowSet, type, sign));
         } catch (SQLException e) {
             e.printStackTrace();
-            if (forward == null)
-                forward = "errorPage.jsp";
-                infoBean.setInfo("数据库访问错误，请重试。");
+            forward = "/errorPage.jsp";
+            infoBean.setInfo("数据库访问错误，请重试。");
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
         requestDispatcher.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 
     private ArrayList<Object> genPageUnit (int page, int pageSize, CachedRowSetImpl rowSet, String type, int sort) throws SQLException {
@@ -139,13 +140,17 @@ public class HandleShow extends HttpServlet {
                     cargoBean.setCargoname(rowSet.getString(cargoBean.CARGONAME));
                     cargoBean.setId(rowSet.getInt(cargoBean.ID));
                     cargoBean.setInventory(rowSet.getInt(cargoBean.INVENTORY));
-                    cargoBean.setPrice(rowSet.getInt(cargoBean.PRICE));
-                    cargoBean.setSort(rowSet.getShort(cargoBean.SORT));
+                    cargoBean.setPrice(rowSet.getDouble(cargoBean.PRICE));
+                    cargoBean.setSort(rowSet.getInt(cargoBean.SORT));
+                    cargoBean.setImage(rowSet.getString(cargoBean.IMAGE));
                     pageUnits.add(cargoBean);
                 }
+                if (! rowSet.next())
+                    break;
             }
             return pageUnits;
         } catch (SQLException e) {
+            e.printStackTrace();
             throw new SQLException();
         }
     }

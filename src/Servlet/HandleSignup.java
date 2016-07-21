@@ -38,7 +38,7 @@ public class HandleSignup extends HttpServlet {
             SQLConnector connector = new SQLConnector();
             String sql = "INSERT INTO user(username,password,realname,email,phonenum) VALUES('"+username+"','"+password+"','"+realname+"','"+email+"','"+phonenum+"')";
             connector.update(sql);
-            forward = "index.jsp";
+            forward = "/index.jsp";
 
             userBean.setUsername(username);
             userBean.setPassword(password);
@@ -47,7 +47,7 @@ public class HandleSignup extends HttpServlet {
             userBean.setPhonenum(phonenum);
         } catch (SQLException e) {
             infoBean.setInfo("此用户名已被使用，请更改。");
-            forward = "register.jsp";
+            forward = "/signUp.jsp";
             e.printStackTrace();
         }
 
@@ -56,6 +56,6 @@ public class HandleSignup extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }
