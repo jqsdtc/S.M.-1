@@ -13,33 +13,33 @@ import java.io.IOException;
 
 /**
  * @Author: michael
- * @Date: 16-7-21 上午1:15
+ * @Date: 16-7-22 上午6:28
  * @Project: S.M.
- * @Package: Servlet
+ * @Package: ${PACKAGE_NAME}
  */
-@WebServlet(name = "UserDetial")
-public class UserDetial extends HttpServlet {
+@WebServlet(name = "HandleLogout")
+public class HandleLogout extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
-        UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
-        InfoBean infoBean = (InfoBean)request.getSession().getAttribute("infoBean");
-        if (infoBean == null) {
-            infoBean = new InfoBean();
-            request.getSession().setAttribute("infoBean", infoBean);
-        }
-        String forward = null;
-        if (userBean == null || !userBean.isState()) {
-            forward = "/index.jsp";
-            infoBean.setInfo("您还未登陆，请登录后重试。");
+        String forward;
+        UserBean userBean = (UserBean)request.getSession().getAttribute("user");
+        InfoBean infoBean = new InfoBean();
+        boolean loginFlag = true;
+        if(userBean == null) {
+            infoBean.setInfo("您还未登录");
+            loginFlag = false;
+            forward = "login.jsp";
+            userBean.setState(false);
         }
         else {
-            forward = "/userDetial.jsp";
+            request.getSession().invalidate();
+            forward = "index.jsp";
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
         requestDispatcher.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        doPost(request, response);
+
     }
 }

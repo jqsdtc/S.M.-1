@@ -9,6 +9,7 @@
 <!DOCTYPE html>
 <jsp:useBean id="infoBean" scope="session" class="JavaBean.InfoBean"/>
 <jsp:useBean id="userBean" scope="session" class="JavaBean.UserBean"/>
+<jsp:useBean id="indentBean" scope="session" class="JavaBean.IndentBean"/>
 <html lang="en">
 <head>
 
@@ -40,7 +41,11 @@
 <div class="nav-bar" id="nav-bar">
     <ul id="nav-tabs">
         <li class="sigh"><a href="/index.jsp"><img src="../image/homepage.jpg"></a></li>
-        <li><a href="/HandleShoppingCart"><img src="../image/05.png">&nbsp;&nbsp;0</a></li>
+        <% if (indentBean.getIndentUnitBeanList() != null) { %>
+        <li><a href="/HandleShoppingCart?quantity=0"><img src="../image/05.png">&nbsp;&nbsp;<%=indentBean.getIndentUnitBeanList().size()%></a></li>
+        <% } else { %>
+        <li><a href="/HandleShoppingCart?quantity=0"><img src="../image/05.png">&nbsp;&nbsp;0</a></li>
+        <% } %>
         <li class="custom"><a href="/UserDetial" name="name">欢迎用户：<jsp:getProperty name="userBean" property="username"></jsp:getProperty></a></li>
     </ul>
 </div>
@@ -87,9 +92,9 @@
         <form action="/HandleLogin" method="post" >
         <p>输入您的用户名及密码登录”我的账户“</p>
         <h5>用户名：</h5>
-        <input type="text" name="E-address">
+        <input type="text" name="username">
         <h5>密码：</h5>
-        <input type="text" name="password">
+        <input type="password" name="password">
         <%--<p><a href="">您忘记了密码？</a></p>--%>
         <button name="login" value="登录">登录</button>
         </form>

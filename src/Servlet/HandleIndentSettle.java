@@ -58,7 +58,7 @@ public class HandleIndentSettle extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            forward = "/indent.jsp";
+            forward = "/HandleShow?type=indent&sign=" + userBean.getId();
             if (indentBean.getPriceAllCount() < userBean.getIntegral()/10)
                 indentBean.setPriceAllCount(0);
             else

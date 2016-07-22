@@ -27,8 +27,8 @@ public class HandleShoppingCart extends HttpServlet {
         CargoBean cargoBean = (CargoBean) request.getSession().getAttribute("cargoBean");
         IndentBean indentBean = (IndentBean) request.getSession().getAttribute("indentBean");
         int quantity = Integer.parseInt(request.getParameter("quantity").trim());
-        ArrayList<CargoBean> indentUnitBeanList = indentBean.getIndentUnitBeanList();
-        float priceAllCount = indentBean.getPriceAllCount();
+        ArrayList<CargoBean> indentUnitBeanList = null;
+        double priceAllCount;
         if (indentBean == null) {
             indentBean = new IndentBean();
             request.getSession().setAttribute("indentBean", indentBean);
@@ -36,25 +36,29 @@ public class HandleShoppingCart extends HttpServlet {
             priceAllCount = 0;
             indentBean.setEmpty(true);
         }
+        else {
+            indentUnitBeanList = indentBean.getIndentUnitBeanList();
+            priceAllCount = indentBean.getPriceAllCount();
+        }
         InfoBean infoBean = (InfoBean) request.getSession().getAttribute("infoBean");
         if (infoBean == null) {
             infoBean = new InfoBean();
             request.getSession().setAttribute("infoBean", infoBean);
         }
         String forward;
-        if (cargoBean == null) {
+        if (cargoBean == null || cargoBean.getId() == 0) {
             infoBean.setInfo("");
         }
         else {
             cargoBean.setQuantity(quantity);
             indentUnitBeanList.add(cargoBean);
-            priceAllCount += cargoBean.getPrice();
+            priceAllCount += cargoBean.getPrice() * cargoBean.getQuantity();
             indentBean.setIndentUnitBeanList(indentUnitBeanList);
             indentBean.setPriceAllCount(priceAllCount);
             indentBean.setEmpty(false);
             infoBean.setInfo("");
         }
-        forward = "HandleIndentSettle";
+        forward = "/shoppingCart.jsp";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
         requestDispatcher.forward(request, response);
     }

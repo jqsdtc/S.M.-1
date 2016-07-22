@@ -33,7 +33,7 @@ public class HandleDetial extends HttpServlet {
             request.getSession().setAttribute("infoBean", infoBean);
         }
         if (showListBean == null) {
-            forward = "/WEB-INF/errorPage.jsp";
+            forward = "/errorPage.jsp";
             infoBean.setInfo("数据库访问错误，请重试。");
             RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
             requestDispatcher.forward(request, response);
@@ -43,7 +43,7 @@ public class HandleDetial extends HttpServlet {
             if (type.equals("cargo") && ((CargoBean)bean).getId() == id) {
                 cargoBean = (CargoBean)bean;
                 request.getSession().setAttribute("cargoBean", cargoBean);
-                forward = "/WEB-INF/detial.jsp";
+                forward = "/detial.jsp";
                 break;
             }
             else if (type.equals("indent") && ((IndentUnitBean)bean).getId() == id) {

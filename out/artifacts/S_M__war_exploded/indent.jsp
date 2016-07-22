@@ -1,4 +1,8 @@
-<%--
+<%@ page import="JavaBean.IndentUnitBean" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="Util.SQLConnector" %>
+<%@ page import="java.sql.SQLException" %>
+<%@ page import="JavaBean.CargoBean" %><%--
   Created by IntelliJ IDEA.
   User: michael
   Date: 16-7-21
@@ -10,6 +14,8 @@
 <jsp:useBean id="infoBean" scope="session" class="JavaBean.InfoBean"/>
 <jsp:useBean id="userBean" scope="session" class="JavaBean.UserBean"/>
 <jsp:useBean id="indentBean" scope="session" class="JavaBean.IndentBean"/>
+<jsp:useBean id="showListBean" scope="session" class="JavaBean.ShowListBean"/>
+<jsp:useBean id="indentUnitBean" scope="session" class="JavaBean.IndentUnitBean"/>
 <html lang="en">
 <head>
 
@@ -76,15 +82,48 @@
         </div>
 
         <div class="tab-content">
-            <div class="tab-pane fade in active" id="info">
-                <p>详细信息</p>
-                <ul>
-                    <li>电子邮箱地址：<jsp:getProperty name="userBean" property="email"/></li>
-                    <li>积分：<jsp:getProperty name="userBean" property="integral"/></li>
-                    <li>电话：<jsp:getProperty name="userBean" property="phonenum"/></li>
-                </ul>
-                <a href="/" value="个人信息">修改个人信息</a>
-                <a href="changePassword" value="密码">修改密码</a>
+
+            <div id="list">
+                <table class="table table-hover">
+                    <caption>历史订单</caption>
+                    <thead>
+                    <tr>
+                        <th>商品图示</th>
+                        <th>名称</th>
+                        <th>价格</th>
+                        <th>数量</th>
+                        <th>日期</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <% for (Object bean: showListBean.getBeanSet()) {
+                        indentUnitBean = (IndentUnitBean)bean;
+                        String sql = "select * from cargo where id="+indentUnitBean.getCid();
+                        SQLConnector connector = new SQLConnector();
+                        ResultSet resultSet = connector.qurey(sql);
+                        String image = null;
+                        String cargoName = null;
+                        double price = 0;
+                        try {
+                            resultSet.next();
+                            image = resultSet.getString(CargoBean.IMAGE);
+                            cargoName = resultSet.getString(CargoBean.CARGONAME);
+                            price = resultSet.getDouble(CargoBean.PRICE);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
+                        }
+                        SQLConnector.closeResultSet(resultSet); %>
+                    <tr>
+                        <td><img src="<%=request.getContextPath() %><%= image %>/70px/1.jpg"></td>
+                        <td><%=cargoName%></td>
+                        <td><%=price%>0</td>
+                        <td><%= indentUnitBean.getQuantity()%></td>
+                        <td><%= indentUnitBean.getDate()%></td>
+                    </tr>
+                    <% } %>
+                    </tbody>
+                </table>
             </div>
 
         </div>

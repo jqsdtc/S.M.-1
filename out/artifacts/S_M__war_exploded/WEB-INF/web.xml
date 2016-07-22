@@ -52,14 +52,6 @@
         <url-pattern>/HandleIndentSettle</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>HandleIndex</servlet-name>
-        <servlet-class>Servlet.HandleIndex</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>HandleIndex</servlet-name>
-        <url-pattern>/HandleIndex</url-pattern>
-    </servlet-mapping>
-    <servlet>
         <servlet-name>HandleShoppingCart</servlet-name>
         <servlet-class>Servlet.HandleShoppingCart</servlet-class>
     </servlet>
@@ -82,6 +74,30 @@
     <servlet-mapping>
         <servlet-name>UserDetial</servlet-name>
         <url-pattern>/UserDetial</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>HandleDelete</servlet-name>
+        <servlet-class>Servlet.HandleDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleDelete</servlet-name>
+        <url-pattern>/HandleDelete</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>HandleLogout</servlet-name>
+        <servlet-class>Servlet.HandleLogout</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>HandleLogout</servlet-name>
+        <url-pattern>/HandleLogout</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>AddressDelete</servlet-name>
+        <servlet-class>Servlet.AddressDelete</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AddressDelete</servlet-name>
+        <url-pattern>/AddressDelete</url-pattern>
     </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.jsp</welcome-file>

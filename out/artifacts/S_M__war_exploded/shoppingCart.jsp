@@ -1,4 +1,6 @@
-<%--
+<%@ page import="JavaBean.CargoBean" %>
+<%@ page import="JavaBean.IndentBean" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: michael
   Date: 16-7-21
@@ -9,6 +11,16 @@
 <!DOCTYPE html>
 <jsp:useBean id="infoBean" scope="session" class="JavaBean.InfoBean"/>
 <jsp:useBean id="userBean" scope="session" class="JavaBean.UserBean"/>
+<jsp:useBean id="indentBean" scope="session" class="JavaBean.IndentBean"/>
+<%
+    if (indentBean == null || indentBean.getIndentUnitBeanList() == null) {
+        indentBean = new IndentBean();
+        request.getSession().setAttribute("indentBean", indentBean);
+        indentBean.setIndentUnitBeanList(new ArrayList<CargoBean>());
+        indentBean.setPriceAllCount(0);
+        indentBean.setEmpty(true);
+    } %>
+<jsp:useBean id="cargoBean" scope="session" class="JavaBean.CargoBean" />
 <html lang="en">
 
 <head>
@@ -16,7 +28,8 @@
     <link href="../CSS/bootstrap.min.css" rel="stylesheet">
     <script src="../js/jquery-3.1.0.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/num.js"></script>
+    <script type="text/javascript" src="../js/jquery.spinner.js"></script>
+    <link rel="stylesheet" href="../CSS/jquery.spinner.css">
     <link href="../CSS/common.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="../CSS/goodsCar.css">
     <title>goodsCar</title>
@@ -39,7 +52,11 @@
 <div class="nav-bar" id="nav-bar">
     <ul id="nav-tabs">
         <li class="sigh"><a href="/index.jsp"><img src="../image/homepage.jpg"></a></li>
-        <li><a href="/HandleShoppingCart"><img src="../image/05.png">&nbsp;&nbsp;0</a></li>
+        <% if (indentBean.getIndentUnitBeanList() != null) { %>
+        <li><a href="/HandleShoppingCart?quantity=0"><img src="../image/05.png">&nbsp;&nbsp;<%=indentBean.getIndentUnitBeanList().size()%></a></li>
+        <% } else { %>
+        <li><a href="/HandleShoppingCart?quantity=0"><img src="../image/05.png">&nbsp;&nbsp;0</a></li>
+        <% } %>
         <li class="custom"><a href="/UserDetial" name="name">欢迎用户：<jsp:getProperty name="userBean" property="username"></jsp:getProperty></a></li>
     </ul>
 </div>
@@ -66,43 +83,37 @@
 
 <div class="left">
     <div class="carContent">
-        <p class="car-head">购物车（）</p>
-        <p>您的就购物车中有&nbsp;件商品</p>
-        <div class="goodNo" id="NO1">
-            <img src="../image/shou.jpg">
+        <p class="car-head">购物车</p>
+        <p>您的就购物车中有<%= indentBean.getIndentUnitBeanList().size() %>件商品</p>
+        <% for (int i = 0; i < indentBean.getIndentUnitBeanList().size(); i++) { cargoBean = indentBean.getIndentUnitBeanList().get(i); %>
+        <div class="goodNo" id="NO<%= i %>">
+            <img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/300px/1.jpg">
             <div class="delete">
-                <a href="">删除</a>
+                <a href="/HandleDelete?No.=<%= i %>">删除</a>
             </div>
             <div class="goodInfo">
-                <p>熊火龙套装手办</p>
-                <p>数量：<a href="javascript:void(0);" class="up" id="add">+</a><input type="text" name="" value="1" id="num"><a href="javascript:void(0);" class="down" id="sub">-</a></p>
-                <p>总价：</p>
+                <p><jsp:getProperty name="cargoBean" property="cargoname"/></p>
+                <p>数量：<input type="text" class="spinner" value="<jsp:getProperty name="cargoBean" property="quantity"/>" /></p>
+                <p>总价：￥<%= cargoBean.getQuantity()*cargoBean.getPrice() %>0</p>
             </div>
         </div>
-        <div class="goodNo" id="No2">
-            <img src="../image/lbj001.jpg">
-            <div class="delete">
-                <a href="">删除</a>
-            </div>
-            <div class="goodInfo">
-                <p>"WhatTheKBJ"11</p>
-                <p>数量：<a href="javascript:void(0);" class="up">+</a><input type="text" name="" value="1" id="num"><a href="javascript:void(0);" class="down">-</a></p>
-                <p>总价：</p>
-            </div>
-        </div>
+        <% } %>
     </div>
 
+    <% if(indentBean.getIndentUnitBeanList().size() != 0) {%>
     <div class="goodList">
         <div class="listTop">
             <p>购物车</p>
-            <div><p class="l">熊火龙套装手办</p><p class="r">￥</p></div>
-            <div><p class="l">"WhatTheKBJ"11</p><p class="r">￥</p></div>
+            <% for (int i = 0; i < indentBean.getIndentUnitBeanList().size(); i++) { cargoBean = indentBean.getIndentUnitBeanList().get(i); %>
+            <div><p class="l"><jsp:getProperty name="cargoBean" property="cargoname"/></p><p class="r">￥<%= cargoBean.getQuantity()*cargoBean.getPrice() %>0</p></div>
+            <% } %>
         </div>
         <div class="listBottom">
-            <div><p class="l">总计:</p><p class="r">￥</p></div>
-            <button name="check">去结算</button>
+            <div><p class="l">总计:</p><p class="r">￥<jsp:getProperty name="indentBean" property="priceAllCount"/>0</p></div>
+            <a href="/HandleIndentSettle">去结算</a>
         </div>
     </div>
+    <% } %>
 </div>
 
 <div id="bottom" class="bottom">
@@ -113,6 +124,11 @@
         <li>网站声明</li>
     </ul>
 </div>
+
+<script type="text/javascript">
+    $('.spinner').spinner();
+</script>
 </body>
 
 </html>
+

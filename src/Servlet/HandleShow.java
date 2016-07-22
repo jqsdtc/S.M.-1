@@ -84,7 +84,7 @@ public class HandleShow extends HttpServlet {
                 }
                 else {
                     sql = "SELECT * FROM address WHERE uid='" + sign + "'";
-                    forward = "/indent.jsp";
+                    forward = "/address.jsp";
                 }
             }
             else {
@@ -105,6 +105,10 @@ public class HandleShow extends HttpServlet {
             e.printStackTrace();
             forward = "/errorPage.jsp";
             infoBean.setInfo("数据库访问错误，请重试。");
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            forward = "/errorPage.jsp";
+            infoBean.setInfo("数据为空。");
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
         requestDispatcher.forward(request, response);
@@ -152,6 +156,9 @@ public class HandleShow extends HttpServlet {
         } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            e.printStackTrace();
+            throw new ArrayIndexOutOfBoundsException();
         }
     }
 }

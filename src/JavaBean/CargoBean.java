@@ -15,17 +15,17 @@ public class CargoBean {
     private int quantity;
     private String image;
 
-    public final short ID = 1;
-    public final short CARGONAME = 2;
-    public final short INVENTORY = 3;
-    public final short PRICE = 4;
-    public final short SORT = 5;
-    public final short IMAGE = 6;
+    public static final short ID = 1;
+    public static final short CARGONAME = 2;
+    public static final short INVENTORY = 3;
+    public static final short PRICE = 4;
+    public static final short SORT = 5;
+    public static final short IMAGE = 6;
 
-    public final short CLOTHES = 7;
-    public final short ORNAMENT = 8;
-    public final short TOY = 9;
-    public final short SHOE = 10;
+    public static final short CLOTHES = 7;
+    public static final short ORNAMENT = 8;
+    public static final short TOY = 9;
+    public static final short SHOE = 10;
 
     public int getId() {
         return id;

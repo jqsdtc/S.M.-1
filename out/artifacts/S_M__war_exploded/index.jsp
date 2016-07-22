@@ -7,6 +7,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:useBean id="userBean" scope="session" class="JavaBean.UserBean"/>
+<jsp:useBean id="indentBean" scope="session" class="JavaBean.IndentBean"/>
 <!DOCTYPE html>
 <html>
 <head>
@@ -38,7 +39,11 @@
 <div class="nav-bar" id="nav-bar">
     <ul id="nav-tabs">
         <li class="sigh"><a href="/index.jsp"><img src="../image/homepage.jpg"></a></li>
-        <li><a href="/HandleShoppingCart"><img src="../image/05.png">&nbsp;&nbsp;0</a></li>
+        <% if (indentBean.getIndentUnitBeanList() != null) { %>
+        <li><a href="/HandleShoppingCart?quantity=0"><img src="../image/05.png">&nbsp;&nbsp;<%=indentBean.getIndentUnitBeanList().size()%></a></li>
+        <% } else { %>
+        <li><a href="/HandleShoppingCart?quantity=0"><img src="../image/05.png">&nbsp;&nbsp;0</a></li>
+        <% } %>
         <li class="custom"><a href="/UserDetial" name="name">欢迎用户：<jsp:getProperty name="userBean" property="username"></jsp:getProperty></a></li>
     </ul>
 </div>
@@ -76,13 +81,13 @@
     <!-- 轮播（Carousel）项目 -->
     <div class="carousel-inner">
         <div class="item active"><a href="">
-            <img src="../image/home5.jpg"></a>
+            <img src="../image/home/600px/1.jpg"></a>
         </div>
         <div class="item"><a href="">
-            <img src="../image/haha.png"></a>
+            <img src="../image/home/600px/2.jpg"></a>
         </div>
         <div class="item"><a href="">
-            <img src="../image/home4.jpg"></a>
+            <img src="../image/home/600px/3.jpg"></a>
         </div>
     </div>
     <!-- 轮播（Carousel）导航 -->

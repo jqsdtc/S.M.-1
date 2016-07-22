@@ -10,6 +10,7 @@
 <jsp:useBean id="infoBean" scope="session" class="JavaBean.InfoBean"/>
 <jsp:useBean id="cargoBean" scope="session" class="JavaBean.CargoBean"/>
 <jsp:useBean id="userBean" scope="session" class="JavaBean.UserBean"/>
+<jsp:useBean id="indentBean" scope="session" class="JavaBean.IndentBean"/>
 <html lang="en">
 
 <head>
@@ -42,7 +43,11 @@
 <div class="nav-bar" id="nav-bar">
     <ul id="nav-tabs">
         <li class="sigh"><a href="/index.jsp"><img src="../image/homepage.jpg"></a></li>
-        <li><a href="/HandleShoppingCart"><img src="../image/05.png">&nbsp;&nbsp;0</a></li>
+        <% if (indentBean.getIndentUnitBeanList() != null) { %>
+        <li><a href="/HandleShoppingCart?quantity=0"><img src="../image/05.png">&nbsp;&nbsp;<%=indentBean.getIndentUnitBeanList().size()%></a></li>
+        <% } else { %>
+        <li><a href="/HandleShoppingCart?quantity=0"><img src="../image/05.png">&nbsp;&nbsp;0</a></li>
+        <% } %>
         <li class="custom"><a href="/UserDetial" name="name">欢迎用户：<jsp:getProperty name="userBean" property="username"></jsp:getProperty></a></li>
     </ul>
 </div>
@@ -82,38 +87,42 @@
     <div class="tool-info">
         <div class="toolPic">
             <div class="toolNo" id="No1">
-                <img src="../image/lbj01.jpg">
+                <img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/350px/1.jpg">
             </div>
             <div class="toolNo" id="No2">
-                <img src="../image/lbj02.jpg">
+                <img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/350px/2.jpg">
             </div>
             <div class="toolNo" id="No3">
-                <img src="../image/lbj03.jpg">
+                <img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/350px/3.jpg">
             </div>
             <div class="toolNo" id="No4">
-                <img src="../image/lbj04.jpg">
+                <img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/350px/4.jpg">
             </div>
             <div class="toolNo" id="No5">
-                <img src="../image/lbj05.jpg">
+                <img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/350px/5.jpg">
             </div>
         </div>
 
         <div class="miniPic">
             <ul class="toolTabs">
-                <li class="choose"><a href="#No1"><img src="../image/lbj10.jpg"></a></li>
-                <li><a href="#No2"><img src="../image/lbj10.jpg"></a></li>
-                <li><a href="#No3"><img src="../image/lbj10.jpg"></a></li>
-                <li><a href="#No4"><img src="../image/lbj10.jpg"></a></li>
-                <li><a href="#No5"><img src="../image/lbj10.jpg"></a></li>
+                <li class="choose"><a href="#No1"><img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/70px/1.jpg"></a></li>
+                <li><a href="#No2"><img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/70px/2.jpg"></a></li>
+                <li><a href="#No3"><img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/70px/3.jpg"></a></li>
+                <li><a href="#No4"><img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/70px/4.jpg"></a></li>
+                <li><a href="#No5"><img src="<%=request.getContextPath() %><jsp:getProperty name="cargoBean" property="image"/>/70px/5.jpg"></a></li>
             </ul>
         </div>
     </div>
     <div class="buyInfo">
-        <p>"WhatTheLBJ"11</p>
-        <p>￥5299</p>
-        <p class="number">数量：<input type="text" name="quatity">&nbsp;（1～999）</p>
-        <button name="toolCar">添加到购物车</button><br>
-        <button name="return">返回继续购物</button>
+        <p><jsp:getProperty name="cargoBean" property="cargoname"/>0</p>
+        <p>￥<jsp:getProperty name="cargoBean" property="price"/>0</p>
+        <form action="/HandleShoppingCart" method="post">
+            <p class="number">数量：
+                <input type="text" name="quantity">&nbsp;（1～999）
+            </p>
+            <button name="toolCar">添加到购物车</button><br>
+        </form>
+        <a href="/HandleShow?type=cargo&sign=7">返回继续购物</a>
     </div>
 </div>
 

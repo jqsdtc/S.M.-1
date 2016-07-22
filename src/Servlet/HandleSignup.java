@@ -47,7 +47,7 @@ public class HandleSignup extends HttpServlet {
             userBean.setPhonenum(phonenum);
         } catch (SQLException e) {
             infoBean.setInfo("此用户名已被使用，请更改。");
-            forward = "/signUp.jsp";
+            forward = "/signup.jsp";
             e.printStackTrace();
         }
 

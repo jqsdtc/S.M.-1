@@ -1,4 +1,4 @@
-<%--
+<%@ page import="JavaBean.AddressBean" %><%--
   Created by IntelliJ IDEA.
   User: michael
   Date: 16-7-21
@@ -10,6 +10,8 @@
 <jsp:useBean id="infoBean" scope="session" class="JavaBean.InfoBean"/>
 <jsp:useBean id="userBean" scope="session" class="JavaBean.UserBean"/>
 <jsp:useBean id="indentBean" scope="session" class="JavaBean.IndentBean"/>
+<jsp:useBean id="showListBean" scope="session" class="JavaBean.ShowListBean"/>
+<jsp:useBean id="addressBean" scope="session" class="JavaBean.AddressBean"/>
 <html lang="en">
 <head>
 
@@ -76,15 +78,27 @@
         </div>
 
         <div class="tab-content">
-            <div class="tab-pane fade in active" id="info">
-                <p>详细信息</p>
-                <ul>
-                    <li>电子邮箱地址：<jsp:getProperty name="userBean" property="email"/></li>
-                    <li>积分：<jsp:getProperty name="userBean" property="integral"/></li>
-                    <li>电话：<jsp:getProperty name="userBean" property="phonenum"/></li>
-                </ul>
-                <a href="/" value="个人信息">修改个人信息</a>
-                <a href="changePassword" value="密码">修改密码</a>
+
+            <div id="address">
+                <p class="title">地址簿</p>
+                <p>您可以在这里保存您的配送地址以加快日后结帐流程</p>
+                <p>您第一个保存的地址设为“默认配送地址”</p>
+                <p class="title">已保存地址</p>
+                <form>
+                    <ul>
+                        <% for (Object bean: showListBean.getBeanSet()) { addressBean = (AddressBean) bean; %>
+                        <li><img src="../image/pos1.png"><%=addressBean.getAddress()%> <jsp:getProperty name="userBean" property="realname"/>收<a href="">修改</a><a href="/AddressDelete?id=<%=addressBean.getId()%>">删除</a></li>
+                        <% } %>
+                    </ul>
+                </form>
+
+                <a href="#address1">添加新地址</a>
+                <div class="active" id="address1">
+                    <form action="HandleAdd" method="post">
+                        新地址：<input type="text" name="address">
+                        <button name="submit">提交</button>
+                    </form>
+                </div>
             </div>
 
         </div>

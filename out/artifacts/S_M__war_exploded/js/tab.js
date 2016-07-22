@@ -1,4 +1,5 @@
-$(function(){
+$(document).ready(function(){
+	if($('#getnum').attr())
 	$('#tool-content div ul li a').click(function(){
 		$('#tool-content div ul li.on').removeClass('on');
 		$(this).parent().addClass('on');

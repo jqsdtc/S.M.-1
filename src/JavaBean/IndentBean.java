@@ -10,14 +10,14 @@ import java.util.ArrayList;
  */
 public class IndentBean {
     ArrayList<CargoBean> indentUnitBeanList = null;
-    float priceAllCount;
+    double priceAllCount;
     boolean empty;
 
-    public float getPriceAllCount() {
+    public double getPriceAllCount() {
         return priceAllCount;
     }
 
-    public void setPriceAllCount(float priceAllCount) {
+    public void setPriceAllCount(double priceAllCount) {
         this.priceAllCount = priceAllCount;
     }
 

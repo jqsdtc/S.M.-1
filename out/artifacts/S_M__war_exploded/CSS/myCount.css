@@ -8,10 +8,8 @@
     width: 15%;
     padding-left: 30px;
     padding-top: 35px;
-    background-color: #000;
+    background-color: #333;
     height: 800px;
-    opacity: 0.7;
-    filter:alpha(opacity=70);
 }
 
 #custom-content div.custom-list p{
@@ -50,7 +48,6 @@
     padding-top: 30px;
     padding-left: 30px;
     padding-right:50px; 
-    opacity: 0.98;
 }
 
 #custom-content div .custom-head p{
@@ -119,4 +116,46 @@
 
 #custom-content div .tab-content div button a:hover{
     color: red;
+}
+
+caption{
+    margin-left: 5px;
+    color: #000;
+    font-size: 16px;
+}
+
+#custom-content div .tab-content #address{
+    color: #6f6f6f;
+}
+
+#custom-content div .tab-content #address p{
+    font-size: 15px;
+    color: #6f6f6f;
+    margin-bottom: 20px;
+}
+
+#custom-content div .tab-content #address .title{
+    font-size: 20px;
+    color: #000;
+}
+#custom-content div .tab-content #address ul li{
+    height: 50px;
+}
+
+#custom-content div .tab-content #address ul li a{
+    margin-left: 50px;
+    color: #000;
+}
+#custom-content div .tab-content #address form{
+    margin-bottom: 40px;
+}
+
+#custom-content div .tab-content #address a{
+    color: #000;
+}
+
+#custom-content div .tab-content #address div form input {
+    border: 1px #000 solid;
+    margin-left: 10px;
+    margin-right: 20px;
 }

@@ -11,6 +11,7 @@
 <jsp:useBean id="infoBean" scope="session" class="JavaBean.InfoBean"/>
 <jsp:useBean id="showListBean" scope="session" class="JavaBean.ShowListBean"/>
 <jsp:useBean id="userBean" scope="session" class="JavaBean.UserBean"/>
+<jsp:useBean id="indentBean" scope="session" class="JavaBean.IndentBean"/>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,7 +43,11 @@
 <div class="nav-bar" id="nav-bar">
     <ul id="nav-tabs">
         <li class="sigh"><a href="/index.jsp"><img src="../image/homepage.jpg"></a></li>
-        <li><a href="/HandleShoppingCart"><img src="../image/05.png">&nbsp;&nbsp;0</a></li>
+        <% if (indentBean.getIndentUnitBeanList() != null) { %>
+        <li><a href="/HandleShoppingCart?quantity=0"><img src="../image/05.png">&nbsp;&nbsp;<%=indentBean.getIndentUnitBeanList().size()%></a></li>
+        <% } else { %>
+        <li><a href="/HandleShoppingCart?quantity=0"><img src="../image/05.png">&nbsp;&nbsp;0</a></li>
+        <% } %>
         <li class="custom"><a href="/UserDetial" name="name">欢迎用户：<jsp:getProperty name="userBean" property="username"></jsp:getProperty></a></li>
     </ul>
 </div>
@@ -92,9 +97,10 @@
             <div class="tools">
                 <% for (Object cargoBean: showListBean.getBeanSet()) { %>
                 <div>
-                    <a><img src=" <% ((JavaBean.CargoBean)cargoBean).getImage(); %> "></a>
-                    <P><% ((JavaBean.CargoBean)cargoBean).getCargoname(); %></p>
-                    <p><% ((JavaBean.CargoBean)cargoBean).getPrice(); %></p>
+                    <a href="HandleDetial?type=cargo&ID=<% out.print(((JavaBean.CargoBean)cargoBean).getId()); %>"><img src="<%=request.getContextPath() %><% out.print(((JavaBean.CargoBean)cargoBean).getImage().trim()); %>/300px/1.jpg"></a>
+                    <P><% out.print(((JavaBean.CargoBean)cargoBean).getCargoname().trim()); %></p>
+                    <p><% out.print(((JavaBean.CargoBean)cargoBean).getPrice()); %>0元</p>
+                    <input type="hidden" id="getnum" value="<% out.print(((JavaBean.CargoBean)cargoBean).getSort()); %>">
                 </div>
                 <% } %>
             </div>
