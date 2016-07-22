@@ -80,13 +80,13 @@
     </ol>
     <!-- 轮播（Carousel）项目 -->
     <div class="carousel-inner">
-        <div class="item active"><a href="">
+        <div class="item active"><a href="/HandleDetial?type=cargo&ID=10">
             <img src="../image/home/600px/1.jpg"></a>
         </div>
-        <div class="item"><a href="">
+        <div class="item"><a href="/HandleDetial?type=cargo&ID=8">
             <img src="../image/home/600px/2.jpg"></a>
         </div>
-        <div class="item"><a href="">
+        <div class="item"><a href="/HandleDetial?type=cargo&ID=7">
             <img src="../image/home/600px/3.jpg"></a>
         </div>
     </div>

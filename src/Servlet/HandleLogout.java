@@ -22,7 +22,7 @@ public class HandleLogout extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         request.setCharacterEncoding("utf-8");
         String forward;
-        UserBean userBean = (UserBean)request.getSession().getAttribute("user");
+        UserBean userBean = (UserBean)request.getSession().getAttribute("userBean");
         InfoBean infoBean = new InfoBean();
         boolean loginFlag = true;
         if(userBean == null) {
@@ -40,6 +40,6 @@ public class HandleLogout extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

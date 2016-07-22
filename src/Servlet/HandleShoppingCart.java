@@ -29,7 +29,7 @@ public class HandleShoppingCart extends HttpServlet {
         int quantity = Integer.parseInt(request.getParameter("quantity").trim());
         ArrayList<CargoBean> indentUnitBeanList = null;
         double priceAllCount;
-        if (indentBean == null) {
+        if (indentBean == null || indentBean.getIndentUnitBeanList() == null) {
             indentBean = new IndentBean();
             request.getSession().setAttribute("indentBean", indentBean);
             indentUnitBeanList = new ArrayList<CargoBean>();
