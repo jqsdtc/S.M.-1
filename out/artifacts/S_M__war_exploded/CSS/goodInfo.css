@@ -1,0 +1,56 @@
+.tool-info{
+	float: left;
+}
+
+.toolPic .toolNo{
+	margin-left: 100px;
+}
+
+.miniPic{
+	margin-top: 20px;
+	margin-left: 70px;	
+}
+
+.miniPic ul li{
+	float: left;
+	list-style-type: none;
+	margin-right: 15px;
+}
+
+.miniPic ul li.choose{
+	border:1px #000 solid;
+}
+
+.buyInfo{
+	width: 350px;
+	float: right;
+	margin-top: 30px;
+	font-size: 18px; 
+}
+
+.buyInfo p input{
+	text-align: center;
+	width: 60px;
+	line-height: 20px;
+
+}
+
+.buyInfo p{
+	text-align: center;
+	margin-top: 30px;
+}
+
+.buyInfo p.number{
+	font-size: 15px;
+	margin-left: 50px;
+}
+
+.buyInfo button{
+	font-size: 15px;
+	width: 150px;
+	margin-left: 110px;
+	margin-top: 30px;
+	background-color: #000;
+	color: #fff;
+	border:none;
+}

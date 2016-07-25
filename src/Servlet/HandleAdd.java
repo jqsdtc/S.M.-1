@@ -39,10 +39,10 @@ public class HandleAdd extends HttpServlet {
             SQLConnector connector = new SQLConnector();
             String sql = "INSERT INTO address(uid,address) VALUES('"+userBean.getId()+"','"+address+"')";
             connector.update(sql);
-            forward = "";
+            forward = "/HandleShow?type=address&sign=" + userBean.getId();
 
         } catch (SQLException e) {
-            forward = "errorPage.jsp";
+            forward = "/errorPage.jsp";
             infoBean.setInfo("数据库访问错误，请重试。");
             e.printStackTrace();
         }
@@ -51,6 +51,6 @@ public class HandleAdd extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

@@ -49,16 +49,16 @@ public class HandleLogin extends HttpServlet {
                 userBean.setIntegral(resultSet.getInt(userBean.INTEGRAL));
                 infoBean.setInfo("登录成功！");
                 userBean.setState(true);
-                forward = "index-after.jsp";
+                forward = "/index.jsp";
             }
             else {
                 infoBean.setInfo("用户名或密码错误，请确认后重新登录。");
-                forward = "login.jsp";
+                forward = "/login.jsp";
                 userBean.setState(false);
             }
         } catch (SQLException e) {
             infoBean.setInfo("数据库访问错误,请重试。");
-            forward = "login.jsp";
+            forward = "/login.jsp";
             userBean.setState(false);
             e.printStackTrace();
         }
@@ -68,6 +68,6 @@ public class HandleLogin extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

@@ -1,8 +1,8 @@
 .carContent{
 	width: 60%;
 	float: left;
-	margin-left: 80px;
-	margin-top: 50px;
+	margin-left: 50px;
+	margin-top: 60px;
 }
 
 .carContent p{
@@ -28,7 +28,7 @@
 
 .carContent .goodInfo{
 	float: right;
-	margin-right: 400px;
+	margin-right: 170px;
 
 }
 
@@ -36,6 +36,11 @@
 	font-size: 15px;
 	margin-top: 20px;
 	margin-bottom: 80px;
+}
+
+.spinner{
+	float: right;
+	margin-left: 10px;
 }
 
 .carContent .goodNo .delete{
@@ -53,21 +58,21 @@
 }
 
 .goodList{
-	width: 33%;
+	width: 30%;
 	float: right;
 	margin-right: 25px;
-	margin-top: 172px;
+	margin-top: 180px;
 	background-color: #1a1a1a;
-	height: 500px;
+	height: 460px;
 	color: #fff;
 }
 
 .goodList .listTop{
-	height: 300px;
-	padding-left: 50px;
-	padding-top: 40px;
+	height: 280px;
+	padding-left: 30px;
+	padding-top: 30px;
 	padding-right: 30px;
-	font-size: 18px;
+	font-size: 15px;
 	border-bottom: 2px #fff solid;
 }
 
@@ -89,19 +94,26 @@
 }
 
 .goodList .listBottom{
-	padding-top: 40px;
-	padding-left: 50px;
+	padding-top: 30px;
+	padding-left: 30px;
 	padding-right: 30px;
 }
 
 .goodList .listBottom p{
-	font-size: 18px;
+	font-size: 15px;
 }
 
 .goodList .listBottom button{
-	margin-top: 80px;
-	margin-left: 20px;
-	width: 280px;
+	margin-top: 40px;
+	width: 250px;
+	height: 50px;
+	background-color: #4e644d;
+	font-size: 24px;
+	border: none;
+}
+.goodList .listBottom a{
+	margin-top: 40px;
+	width: 250px;
 	height: 50px;
 	background-color: #4e644d;
 	font-size: 24px;

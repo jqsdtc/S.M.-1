@@ -11,9 +11,9 @@ import java.sql.*;
  */
 public class SQLConnector {
     public static final String userName = "root";
-    public static final String userPassword = "960627Xc!";
+    public static final String userPassword = "root";
     public static final String DriverName = "com.mysql.jdbc.Driver";
-    public static final String URL = "jdbc:mysql://localhost:3306/booklist?useUnicode=true&characterEncoding=UTF-8";
+    public static final String URL = "jdbc:mysql://localhost:3306/B2CShoppingMall?useUnicode=true&characterEncoding=UTF-8";
     public Connection con() {
         Connection con = null;
         try {

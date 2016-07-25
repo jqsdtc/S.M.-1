@@ -29,17 +29,17 @@ public class UserDetial extends HttpServlet {
         }
         String forward = null;
         if (userBean == null || !userBean.isState()) {
-            forward = "";
+            forward = "/index.jsp";
             infoBean.setInfo("您还未登陆，请登录后重试。");
         }
         else {
-            forward = "";
+            forward = "/userDetial.jsp";
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
         requestDispatcher.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

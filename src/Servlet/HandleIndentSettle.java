@@ -38,11 +38,11 @@ public class HandleIndentSettle extends HttpServlet {
             request.getSession().setAttribute("infoBean", infoBean);
         }
         if (userBean == null || !userBean.isState()) {
-            forward = "";
+            forward = "/login.jsp";
             infoBean.setInfo("您还未登陆，请登录后重试。");
         }
         if (indentBean == null) {
-            forward = "errorPage.jsp";
+            forward = "/errorPage.jsp";
             infoBean.setInfo("你的购物车空空如也，快去选购一些商品吧。");
         }
         else {
@@ -58,7 +58,7 @@ public class HandleIndentSettle extends HttpServlet {
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            forward = "";
+            forward = "/HandleShow?type=indent&sign=" + userBean.getId();
             if (indentBean.getPriceAllCount() < userBean.getIntegral()/10)
                 indentBean.setPriceAllCount(0);
             else
@@ -73,6 +73,6 @@ public class HandleIndentSettle extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

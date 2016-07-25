@@ -10,20 +10,22 @@ public class CargoBean {
     private int id;
     private String cargoname;
     private int inventory;
-    private float price;
-    private short sort;
+    private double price;
+    private int sort;
     private int quantity;
+    private String image;
 
-    public final short ID = 1;
-    public final short CARGONAME = 2;
-    public final short INVENTORY = 3;
-    public final short PRICE = 4;
-    public final short SORT = 5;
+    public static final short ID = 1;
+    public static final short CARGONAME = 2;
+    public static final short INVENTORY = 3;
+    public static final short PRICE = 4;
+    public static final short SORT = 5;
+    public static final short IMAGE = 6;
 
-    public final short SHOE = 6;
-    public final short CLOTHES = 7;
-    public final short ORNAMENT = 8;
-    public final short TOY = 9;
+    public static final short CLOTHES = 7;
+    public static final short ORNAMENT = 8;
+    public static final short TOY = 9;
+    public static final short SHOE = 10;
 
     public int getId() {
         return id;
@@ -49,19 +51,19 @@ public class CargoBean {
         this.inventory = inventory;
     }
 
-    public float getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(float price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
-    public short getSort() {
+    public int getSort() {
         return sort;
     }
 
-    public void setSort(short sort) {
+    public void setSort(int sort) {
         this.sort = sort;
     }
 
@@ -71,5 +73,13 @@ public class CargoBean {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

@@ -27,14 +27,18 @@ public class HandleShoppingCart extends HttpServlet {
         CargoBean cargoBean = (CargoBean) request.getSession().getAttribute("cargoBean");
         IndentBean indentBean = (IndentBean) request.getSession().getAttribute("indentBean");
         int quantity = Integer.parseInt(request.getParameter("quantity").trim());
-        ArrayList<CargoBean> indentUnitBeanList = indentBean.getIndentUnitBeanList();
-        float priceAllCount = indentBean.getPriceAllCount();
-        if (indentBean == null) {
+        ArrayList<CargoBean> indentUnitBeanList = null;
+        double priceAllCount;
+        if (indentBean == null || indentBean.getIndentUnitBeanList() == null) {
             indentBean = new IndentBean();
             request.getSession().setAttribute("indentBean", indentBean);
             indentUnitBeanList = new ArrayList<CargoBean>();
             priceAllCount = 0;
             indentBean.setEmpty(true);
+        }
+        else {
+            indentUnitBeanList = indentBean.getIndentUnitBeanList();
+            priceAllCount = indentBean.getPriceAllCount();
         }
         InfoBean infoBean = (InfoBean) request.getSession().getAttribute("infoBean");
         if (infoBean == null) {
@@ -42,24 +46,24 @@ public class HandleShoppingCart extends HttpServlet {
             request.getSession().setAttribute("infoBean", infoBean);
         }
         String forward;
-        if (cargoBean == null) {
+        if (cargoBean == null || cargoBean.getId() == 0) {
             infoBean.setInfo("");
         }
         else {
             cargoBean.setQuantity(quantity);
             indentUnitBeanList.add(cargoBean);
-            priceAllCount += cargoBean.getPrice();
+            priceAllCount += cargoBean.getPrice() * cargoBean.getQuantity();
             indentBean.setIndentUnitBeanList(indentUnitBeanList);
             indentBean.setPriceAllCount(priceAllCount);
             indentBean.setEmpty(false);
             infoBean.setInfo("");
         }
-        forward = "";
+        forward = "/shoppingCart.jsp";
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(forward);
         requestDispatcher.forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request, response);
     }
 }

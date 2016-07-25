@@ -15,7 +15,7 @@ public class UserBean {
     private String phonenum;
     private String email;
     private int integral;
-    private boolean state;
+    private boolean state = false;
 
     public final short ID = 1;
     public final short USERNAME = 2;

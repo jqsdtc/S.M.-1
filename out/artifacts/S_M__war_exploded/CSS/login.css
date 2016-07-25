@@ -3,7 +3,7 @@
     background-color: #2b2b2b;
     overflow: auto;
     color: #fff;
-    padding-left: 100px;
+    padding-left: 40px;
     padding-top: 20px;
 }
 
@@ -16,15 +16,15 @@
     margin-left: 40px;
     float: left;
     list-style-type: none;
-    width: 300px;
+    width: 200px;
     text-align: center;
 }
 
 #login-content{
-    padding-top: 120px; 
+    padding-top: 60px; 
     padding-right: 230px;
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     padding-bottom: 100px;
 }
 
@@ -32,11 +32,13 @@
     color: #6f6f6f;
     width: 300px;
     margin-top: 40px;
-    margin-left: 645px;
+    margin-left: 400px;
+    padding-left: 20px;
     text-align: left;
 }
 
 #login-content div input{
+    border:1px #000 solid;
     margin-top: 5px;
     margin-bottom: 10px;
     font-size: 20px;
@@ -46,7 +48,7 @@
     font-size: 17px;
     width: 50px;
     margin-top: 10px;
-    margin-left: 100px;
+    margin-left: 50px;
     color: #fff;
     background-color: #2b2b2b;
     border:none;
@@ -54,7 +56,7 @@
 
 #login-content div p{
     margin-top: 10px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 #login-content div p a{
